@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Hello World</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+      // react 组件
+      class Hello extends React.Component {
+        constructor() {
+          super();
+          // react 所有状态都必须挂载在 this.state
+          this.state = {
+            message: "Hello World!",
+          };
+        }
+
+        change() {
+          // React 修改数据需要通过统一接口setState修改，才会触发视图更新
+          this.setState({
+            message: "Hello React!",
+          });
+        }
+
+        render() {
+          return (
+            <frame-element>
+              <div>{this.state.message}</div>
+              //
+              React内部调用事件回调函数时，会手动指定this为undefined，这里需要强行绑定this
+              <button onClick={this.change.bind(this)}> click change</button>
+            </frame-element>
+          );
+        }
+      }
+
+      // 挂载组件
+      const container = document.getElementById("root");
+      const root = ReactDOM.createRoot(container);
+      root.render(<Hello />);
+    </script>
+  </body>
+</html>
